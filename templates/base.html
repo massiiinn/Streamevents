@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="ca">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}StreamEvents{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body>
+    <header>
+        <h1>{% block header %}StreamEvents{% endblock %}</h1>
+    </header>
+    
+    <main class="container">
+        {% block content %}Contingut{% endblock %}
+    </main>
+    
+    <footer>
+        <p>&copy; 2025 StreamEvents</p>
+    </footer>
+</body>
+</html>
