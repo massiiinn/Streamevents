@@ -26,16 +26,16 @@ més endavant.
 
 streamevents/     
 │── manage.py
-│── streamevents/      # Configuració principal del projecte (settings.py, urls.py...)
-│── users/             # App amb CustomUser
-│── templates/         # Plantilles globals (base.html, layouts, etc.)
-│── static/            # Arxius estàtics (css/, js/, img/)
-│── media/             # Fitxers pujats per usuaris (NO a Git)
-│── fixtures/          # (opc.) JSON amb dades d’exemple
-│── seeds/             # (opc.) Scripts per omplir dades
-│── requirements.txt   # Dependències del projecte
-│── .env               # Variables d’entorn (privat)
-│── env.example        # Exemple públic de .env
+│── streamevents/     
+│── users/            
+│── templates/        
+│── static/           
+│── media/            
+│── fixtures/          
+│── seeds/            
+│── requirements.txt  
+│── .env               
+│── env.example        
 │── README.md
 │── .gitignore
 
@@ -55,9 +55,17 @@ streamevents/
 
 ## 🔐 Variables d'entorn (env.example)
 
+SECRET_KEY=canvia-aixo
+DEBUG=1
+ALLOWED_HOSTS=localhost,127.0.0.1
+MONGO_URL=mongodb://localhost:27017
+DB_NAME=streamevents_db
+
 ---
 
 ## 👤 Superusuari
+
+python manage.py createsuperuser # Serveix per crear superusuari per accedir al admin de Django
 
 ---
 
@@ -66,6 +74,24 @@ streamevents/
 ---
 
 ## 🛠️ Comandes útils
+```bash
+# Activar entorn virtual
+source venv/bin/activate   # Linux / Mac
+venv\Scripts\activate      # Windows
+
+# Executar servidor
+python manage.py runserver
+
+# Migracions
+python manage.py makemigrations
+python manage.py migrate
+
+# Crear superusuari
+python manage.py createsuperuser
+
+# Omplir dades amb fixtures
+python manage.py loaddata fixtures/nom_fitxer.json
+```
 
 ---
 
