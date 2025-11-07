@@ -97,6 +97,29 @@ python manage.py loaddata fixtures/nom_fitxer.json
 
 ## 💾 Fixtures (exemple)
 
+- Carregar fixtures
+```bash
+# Primer carregar grups
+python3 manage.py loaddata users/fixtures/01_groups.json
+
+# Després carregar usuaris
+python3 manage.py loaddata users/fixtures/02_users.json
+```
+- Verificació
+```bash
+# Comprovar grups
+python3 manage.py shell -c "from django.contrib.auth.models import Group; print(Group.objects.all())"
+
+# Comprovar usuaris
+python3 manage.py shell -c "from django.contrib.auth import get_user_model; User=get_user_model(); print(User.objects.all())"
+```
 ---
 
 ## 🌱 Seeds (exemple d'script)
+```bash
+# Crear 10 usuaris de prova per defecte
+python3 manage.py seed_users
+
+# Crear 25 usuaris eliminant els existents
+python3 manage.py seed_users --users 25 --clear
+```

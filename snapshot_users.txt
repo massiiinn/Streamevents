@@ -1,0 +1,107 @@
+[
+  {
+    "pk": 1,
+    "username": "admin",
+    "email": "admin@streamevents.com",
+    "is_staff": true,
+    "is_superuser": true
+  },
+  {
+    "pk": 2,
+    "username": "org1",
+    "email": "org1@streamevents.com",
+    "is_staff": false,
+    "is_superuser": false
+  },
+  {
+    "pk": 3,
+    "username": "part1",
+    "email": "part1@streamevents.com",
+    "is_staff": false,
+    "is_superuser": false
+  },
+  {
+    "pk": 4,
+    "username": "part2",
+    "email": "part2@streamevents.com",
+    "is_staff": false,
+    "is_superuser": false
+  },
+  {
+    "pk": 5,
+    "username": "mod1",
+    "email": "mod1@streamevents.com",
+    "is_staff": false,
+    "is_superuser": false
+  },
+  {
+    "pk": 16,
+    "username": "modesta.higueras1",
+    "email": "modesta.higueras1@streamevents.com",
+    "is_staff": false,
+    "is_superuser": false
+  },
+  {
+    "pk": 17,
+    "username": "estela.campoy2",
+    "email": "estela.campoy2@streamevents.com",
+    "is_staff": false,
+    "is_superuser": false
+  },
+  {
+    "pk": 18,
+    "username": "alba.arias3",
+    "email": "alba.arias3@streamevents.com",
+    "is_staff": false,
+    "is_superuser": false
+  },
+  {
+    "pk": 19,
+    "username": "juan carlos.almazan4",
+    "email": "juan carlos.almazan4@streamevents.com",
+    "is_staff": false,
+    "is_superuser": false
+  },
+  {
+    "pk": 20,
+    "username": "clarisa.talavera5",
+    "email": "clarisa.talavera5@streamevents.com",
+    "is_staff": false,
+    "is_superuser": false
+  },
+  {
+    "pk": 21,
+    "username": "filomena.coello6",
+    "email": "filomena.coello6@streamevents.com",
+    "is_staff": false,
+    "is_superuser": false
+  },
+  {
+    "pk": 22,
+    "username": "ivan.nadal7",
+    "email": "ivan.nadal7@streamevents.com",
+    "is_staff": false,
+    "is_superuser": false
+  },
+  {
+    "pk": 23,
+    "username": "dulce.piquer8",
+    "email": "dulce.piquer8@streamevents.com",
+    "is_staff": false,
+    "is_superuser": false
+  },
+  {
+    "pk": 24,
+    "username": "raimundo.manso9",
+    "email": "raimundo.manso9@streamevents.com",
+    "is_staff": false,
+    "is_superuser": false
+  },
+  {
+    "pk": 25,
+    "username": "anunciacion.yanez10",
+    "email": "anunciacion.yanez10@streamevents.com",
+    "is_staff": false,
+    "is_superuser": false
+  }
+]

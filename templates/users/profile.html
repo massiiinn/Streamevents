@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}El meu perfil{% endblock %}
+
+{% block content %}
+<!-- Contenidor central amb padding -->
+<div class="container py-4">
+  <!-- Targeta centrada amb ombra i ample màxim de 600px -->
+  <div class="card shadow-sm p-4 text-center mx-auto" style="max-width: 600px;">
+    <h3 class="mb-3">
+      <i class="fa-solid fa-user me-2"></i> El meu perfil
+    </h3>
+    
+    <!-- Mostra avatar si existeix, sinó icona genèrica -->
+    {% if user.avatar %}
+      <img src="{{ user.avatar.url }}" alt="Avatar" class="rounded-circle mb-3" width="120" height="120">
+    {% else %}
+      <i class="fa-solid fa-circle-user fa-7x text-secondary mb-3"></i>
+    {% endif %}
+
+    <!-- Mostra el nom i cognoms per separat -->
+    <p><strong>Nom:</strong> {{ user.first_name }}</p>
+    <p><strong>Cognoms:</strong> {{ user.last_name }}</p>
+
+    <!-- Mostra display name si existeix -->
+    {% if user.display_name %}
+      <p><strong>Display Name:</strong> {{ user.display_name }}</p>
+    {% endif %}
+
+    <!-- Mostra correu electrònic -->
+    <p><strong>Correu:</strong> {{ user.email }}</p>
+
+    <!-- Mostra biografia si existeix -->
+    {% if user.bio %}
+      <p><strong>Biografia:</strong> {{ user.bio }}</p>
+    {% endif %}
+
+    <!-- Botó per editar perfil -->
+    <a href="{% url 'users:edit_profile' %}" class="btn btn-outline-primary mt-3 w-100">
+      <i class="fa-solid fa-pen-to-square me-1"></i> Edita el perfil
+    </a>
+
+    <!-- Botó per canviar contrasenya -->
+    <a href="{% url 'users:password_reset' %}" class="btn btn-outline-warning mt-2 w-100">
+      <i class="fa-solid fa-key me-1"></i> Canvia la contrasenya
+    </a>
+  </div>
+</div>
+{% endblock %}

@@ -1,3 +1,114 @@
 body {
-    font-family: sans-serif;
+    background-color: #f8f9fa;
+    font-family: "Segoe UI", Roboto, sans-serif;
+    color: #212529;
+}
+
+/* Navbar */
+.navbar-brand {
+    font-size: 1.6rem;
+}
+
+.navbar .nav-link {
+    color: #fff !important;
+    font-weight: 500;
+    margin-left: 10px;
+}
+
+.navbar .nav-link:hover {
+    text-decoration: underline;
+}
+
+/* Missatges */
+.alert {
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+/* Contingut */
+.container {
+    max-width: 900px;
+}
+
+/* Footer */
+footer {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+/* Perfils */
+.profile-card {
+    background: #fff;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.profile-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.btn-custom {
+    border-radius: 10px;
+    background-color: #007bff;
+    color: white;
+    font-weight: 500;
+}
+
+.btn-custom:hover {
+    background-color: #0056b3;
+}
+
+/* Formularis */
+form input, form textarea, form select {
+    border-radius: 10px !important;
+    padding: 10px !important;
+    border: 1px solid #ced4da;
+    width: 100%;
+}
+
+form input:focus, form textarea:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 4px rgba(0,123,255,0.25);
+    outline: none;
+}
+
+/* Targetes */
+.card {
+    border-radius: 15px;
+    border: none;
+}
+
+.card h3 {
+    color: #333;
+}
+
+/* Botons */
+.btn-primary, .btn-success, .btn-custom {
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+/* Centrat */
+.text-center a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.text-center a:hover {
+    text-decoration: underline;
+}
+
+/* Home page */
+.text-center {
+    animation: fadeIn 0.7s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }

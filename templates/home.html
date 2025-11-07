@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Inici - StreamEvents{% endblock %}
+
+{% block content %}
+<!-- Contingut principal de la pàgina d'inici, centrat verticalment i horitzontalment -->
+<div class="text-center py-5">
+    <!-- Títol principal amb estil Bootstrap -->
+    <h1 class="display-5 fw-bold mb-3">Benvingut/da a <span class="text-primary">StreamEvents</span></h1>
+    <!-- Descripció curta de la plataforma -->
+    <p class="lead text-muted mb-4">La teva plataforma per gestionar esdeveniments en línia.</p>
+
+    <!-- Botons segons si l'usuari està autenticat o no -->
+    {% if user.is_authenticated %}
+        <!-- Botó per anar al perfil -->
+        <a href="{% url 'users:profile' %}" class="btn btn-primary btn-lg me-2">Anar al perfil</a>
+        <!-- Botó per tancar sessió -->
+        <a href="{% url 'users:logout' %}" class="btn btn-outline-danger btn-lg">Tancar sessió</a>
+    {% else %}
+        <!-- Botó per iniciar sessió -->
+        <a href="{% url 'users:login' %}" class="btn btn-primary btn-lg me-2">Inicia sessió</a>
+        <!-- Botó per registrar-se -->
+        <a href="{% url 'users:register' %}" class="btn btn-outline-primary btn-lg">Registra't</a>
+    {% endif %}
+</div>
+{% endblock %}

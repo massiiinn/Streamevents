@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Inicia sessió{% endblock %}
+
+{% block content %}
+<!-- Contenidor centrat verticalment i horitzontalment -->
+<div class="d-flex justify-content-center align-items-center" style="min-height:70vh;">
+  <!-- Targeta per al formulari amb ombra i sense bordes -->
+  <div class="card shadow p-4 border-0" style="max-width: 500px; width: 100%;">
+    <h3 class="text-center mb-4">Inicia sessió</h3>
+
+    <!-- Mostra errors del formulari si n'hi ha -->
+    {% if form.errors %}
+      <div class="alert alert-danger">
+        <strong>Error d'inici de sessió:</strong>
+        <ul class="mb-0 mt-2">
+          {% for field in form %}
+            {% for error in field.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          {% endfor %}
+          {% for error in form.non_field_errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+
+    <!-- Formulari POST amb token CSRF -->
+    <form method="POST" novalidate>
+      {% csrf_token %}
+      {% for field in form %}
+        <div class="mb-3">
+          {{ field.label_tag }} <!-- Etiqueta del camp -->
+          {{ field }} <!-- Input del camp -->
+          {% if field.help_text %}
+            <small class="form-text text-muted">{{ field.help_text }}</small>
+          {% endif %}
+          {% for error in field.errors %}
+            <div class="text-danger small">{{ error }}</div>
+          {% endfor %}
+        </div>
+      {% endfor %}
+
+      <!-- Botó d'enviament -->
+      <button type="submit" class="btn btn-success w-100">Inicia sessió</button>
+    </form>
+
+    <!-- Enllaços per registrar-se o recuperar contrasenya -->
+    <div class="text-center mt-3">
+      <p>Encara no tens compte? <a href="{% url 'users:register' %}">Registra't</a></p>
+      <p><a href="{% url 'users:password_reset' %}">Has oblidat la contrasenya?</a></p>
+    </div>
+  </div>
+</div>
+{% endblock %}

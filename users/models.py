@@ -3,18 +3,16 @@ from djongo import models
 
 
 class CustomUser(AbstractUser):
-    # Camps extra
+    email = models.EmailField(unique=True, blank=False)
     display_name = models.CharField(max_length=150, blank=True)
     bio = models.TextField(blank=True)
     avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
-    # Necessita Pillow instal·lat
 
     def __str__(self):
-        return self.username
+        return self.display_name or self.username
 
 
 class Follow(models.Model):
-    # follower (A) segueix following (B)
     follower = models.ForeignKey(
         'CustomUser',
         related_name='following_set',
@@ -28,7 +26,7 @@ class Follow(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        unique_together = ('follower', 'following')  # Evita duplicats A->B
+        unique_together = ('follower', 'following')
 
     def __str__(self):
         return f'{self.follower} -> {self.following}'

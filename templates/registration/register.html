@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %}Registrar-se{% endblock %}
+
+{% block content %}
+<!-- Contenidor centrat vertical i horitzontal amb alçada mínima -->
+<div class="d-flex justify-content-center align-items-center" style="min-height:70vh;">
+  <!-- Targeta amb ombra per al formulari -->
+  <div class="card shadow p-4 border-0" style="max-width: 500px; width: 100%;">
+    <h3 class="text-center mb-4">Crea un compte</h3>
+
+    <!-- Mostra errors del formulari si n'hi ha -->
+    {% if form.errors %}
+      <div class="alert alert-danger">
+        <strong>Hi ha errors en el formulari:</strong>
+        <ul class="mb-0 mt-2">
+          {% for field in form %}
+            {% for error in field.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          {% endfor %}
+          {% for error in form.non_field_errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+
+    <!-- Formulari POST amb CSRF -->
+    <form method="POST" novalidate>
+      {% csrf_token %}
+      <!-- Itera sobre els camps del formulari -->
+      {% for field in form %}
+        <div class="mb-3">
+          {{ field.label_tag }}
+          {{ field }}
+          {% if field.help_text %}
+            <small class="form-text text-muted">{{ field.help_text }}</small>
+          {% endif %}
+          {% for error in field.errors %}
+            <div class="text-danger small">{{ error }}</div>
+          {% endfor %}
+        </div>
+      {% endfor %}
+
+      <!-- Missatge de comprovació de contrasenya -->
+      <small id="password-match-msg" class="d-block mt-1 mb-2"></small>
+
+      <!-- Botó d'enviament -->
+      <button type="submit" class="btn btn-success w-100">Registrar-se</button>
+    </form>
+
+    <!-- Enllaç per al login -->
+    <div class="text-center mt-3">
+      <p>Ja tens compte? <a href="{% url 'users:login' %}">Inicia sessió</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- Script per comprovar en temps real que les contrasenyes coincideixin -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const pw1 = document.querySelector('#id_password1');
+  const pw2 = document.querySelector('#id_password2');
+  const msg = document.querySelector('#password-match-msg');
+  if (!pw1 || !pw2 || !msg) return;
+
+  pw2.addEventListener('input', () => {
+    if (pw1.value && pw2.value) {
+      if (pw1.value === pw2.value) {
+        msg.textContent = "✅ Les contrasenyes coincideixen";
+        msg.style.color = "green";
+      } else {
+        msg.textContent = "❌ Les contrasenyes no coincideixen";
+        msg.style.color = "red";
+      }
+    } else {
+      msg.textContent = "";
+    }
+  });
+});
+</script>
+{% endblock %}

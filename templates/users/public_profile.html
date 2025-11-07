@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Perfil públic{% endblock %}
+
+{% block content %}
+<!-- Contenidor central amb padding i text centrat -->
+<div class="container py-4 text-center">
+  <!-- Targeta centrada amb ombra i ample màxim de 600px -->
+  <div class="card shadow-sm p-4 mx-auto" style="max-width: 600px;">
+    <!-- Mostra el nom visible del perfil (display_name o username) -->
+    <h3 class="mb-3">Perfil de {{ profile_user.display_name|default:profile_user.username }}</h3>
+
+    <!-- Mostra avatar si existeix, sinó icona genèrica -->
+    {% if profile_user.avatar %}
+      <img src="{{ profile_user.avatar.url }}" alt="Avatar" class="rounded-circle mb-3" width="150" height="150">
+    {% else %}
+      <i class="fa-solid fa-circle-user fa-7x text-secondary mb-3"></i>
+    {% endif %}
+
+    <!-- Mostra nom i cognoms complets -->
+    <p><strong>Nom:</strong> {{ profile_user.first_name }} {{ profile_user.last_name }}</p>
+
+    <!-- Mostra biografia si existeix -->
+    {% if profile_user.bio %}
+      <p><strong>Biografia:</strong> {{ profile_user.bio }}</p>
+    {% endif %}
+
+    <!-- Botó per tornar a l'inici -->
+    <a href="{% url 'home' %}" class="btn btn-outline-primary mt-3">
+      <i class="fa-solid fa-arrow-left me-1"></i> Tornar a l'inici
+    </a>
+  </div>
+</div>
+{% endblock %}

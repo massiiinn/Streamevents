@@ -1,0 +1,38 @@
+<!-- Comprova si hi ha missatges a mostrar (usats amb messages framework de Django) -->
+{% if messages %}
+<!-- Contenidor de toasts fixat a la cantonada superior dreta de la pàgina -->
+<div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100;">
+    {% for message in messages %}
+        <!-- Cada toast correspon a un missatge diferent -->
+        <div class="toast align-items-center text-bg-{{ message.tags|default:'info' }} border-0 shadow-sm" 
+             role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="4000">
+            <div class="d-flex">
+                <!-- Cos del toast amb icona depenent del tipus de missatge -->
+                <div class="toast-body d-flex align-items-center">
+                    <i class="fa-solid me-2
+                        {% if message.tags == 'success' %}fa-circle-check
+                        {% elif message.tags == 'error' or message.tags == 'danger' %}fa-circle-xmark
+                        {% elif message.tags == 'warning' %}fa-triangle-exclamation
+                        {% else %}fa-circle-info
+                        {% endif %}"></i>
+                    {{ message }} <!-- Mostra el text del missatge -->
+                </div>
+                <!-- Botó per tancar manualment el toast -->
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" 
+                        data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<!-- Script per inicialitzar i mostrar automàticament tots els toasts a la càrrega de la pàgina -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const toastEls = document.querySelectorAll('.toast');
+    toastEls.forEach(el => {
+        const toast = new bootstrap.Toast(el, { animation: true, delay: 4000 });
+        toast.show(); // Mostra el toast amb animació i desaparició automàtica
+    });
+});
+</script>
+{% endif %}

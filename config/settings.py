@@ -80,9 +80,9 @@ MEDIA_ROOT = BASE_DIR / 'media'  # MOD: Directori media
 
 AUTH_USER_MODEL = 'users.CustomUser'  # MOD: Model d'usuari personalitzat (definir abans primer migrate)
 
-LOGIN_URL = 'login'  # MOD: Nom URL login
-LOGIN_REDIRECT_URL = 'home'  # MOD: Destí després d'iniciar sessió
-LOGOUT_REDIRECT_URL = 'login'  # MOD: Destí després de tancar sessió
+LOGIN_URL = 'users:login'  # MOD: Nom URL login
+LOGIN_REDIRECT_URL = 'users:profile'  # MOD: Destí després d'iniciar sessió
+LOGOUT_REDIRECT_URL = 'users:login'  # MOD: Destí després de tancar sessió
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

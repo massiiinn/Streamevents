@@ -1,22 +1,47 @@
+{% load static %}
 <!doctype html>
 <html lang="ca">
 <head>
-    <meta charset="utf-8">
-    <title>{% block title %}StreamEvents{% endblock %}</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Títol de la pàgina, es pot sobreescriure amb el bloc title -->
+  <title>{% block title %}StreamEvents{% endblock %}</title>
+
+  <!-- Bootstrap CSS des de CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Font Awesome per icones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Fulla d'estils principal del projecte -->
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
 </head>
-<body>
-    <header>
-        <h1>{% block header %}StreamEvents{% endblock %}</h1>
-    </header>
-    
-    <main class="container">
-        {% block content %}Contingut{% endblock %}
-    </main>
-    
-    <footer>
-        <p>&copy; 2025 StreamEvents</p>
-    </footer>
+
+<body class="bg-light d-flex flex-column min-vh-100">
+
+  <!-- Inclou la barra de navegació -->
+  {% include "includes/navbar.html" %}
+
+  <!-- Contenidor principal amb marge vertical i creixement flexible -->
+  <main class="container my-4 flex-grow-1">
+    <!-- Inclou els missatges flash/toasts -->
+    {% include "includes/messages.html" %}
+    <!-- Bloc de contingut específic de cada pàgina -->
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Inclou el footer -->
+  {% include "includes/footer.html" %}
+
+  <!-- Bootstrap JS Bundle des de CDN (inclou Popper) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Script per inicialitzar tots els toasts automàticament -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const toastElList = [].slice.call(document.querySelectorAll('.toast'));
+      toastElList.map(toastEl => new bootstrap.Toast(toastEl).show());
+    });
+  </script>
 </body>
 </html>
