@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container py-4">
+    <div class="card shadow-sm p-4 mx-auto" style="max-width: 700px;">
+
+        <!-- Títol del formulari segons si és crear o editar -->
+        <h2 class="mb-4 text-center">
+            <i class="fa-solid fa-calendar-plus me-2"></i>
+            {{ form.instance.pk|yesno:"Editar,Crear" }} Esdeveniment
+        </h2>
+
+        <!-- Formulari principal -->
+        <form method="post" enctype="multipart/form-data" novalidate>
+            {% csrf_token %}
+
+            <!-- Errors generals del formulari -->
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger">
+                    {% for error in form.non_field_errors %}
+                        <div>{{ error }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <!-- Camp: títol -->
+            <div class="mb-3">
+                {{ form.title.label_tag }}
+                {{ form.title }}
+                {% for error in form.title.errors %}
+                    <div class="alert alert-danger mt-1">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <!-- Camp: descripció -->
+            <div class="mb-3">
+                {{ form.description.label_tag }}
+                {{ form.description }}
+                {% for error in form.description.errors %}
+                    <div class="alert alert-danger mt-1">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <!-- Camp: categoria -->
+            <div class="mb-3">
+                {{ form.category.label_tag }}
+                {{ form.category }}
+                {% for error in form.category.errors %}
+                    <div class="alert alert-danger mt-1">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <!-- Camp: data programada -->
+            <div class="mb-3">
+                {{ form.scheduled_date.label_tag }}
+                {{ form.scheduled_date }}
+                {% for error in form.scheduled_date.errors %}
+                    <div class="alert alert-danger mt-1">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <!-- Camp: miniatura -->
+            <div class="mb-3">
+                {{ form.thumbnail.label_tag }}
+
+                <!-- Mostrar la miniatura actual o per defecte -->
+                <div class="mb-2">
+                    {% if form.instance.thumbnail %}
+                        <img src="{{ form.instance.thumbnail.url }}" alt="Thumbnail" class="img-thumbnail" style="max-height:150px;">
+                    {% else %}
+                        <img src="{% static 'events/default_thumbnail.jpg' %}" alt="Thumbnail per defecte" class="img-thumbnail" style="max-height:150px;">
+                    {% endif %}
+                </div>
+
+                {{ form.thumbnail }}
+
+                <!-- Checkbox per eliminar la miniatura actual -->
+                {% if form.instance.thumbnail %}
+                    <div class="form-check mt-2">
+                        <input type="checkbox" name="thumbnail-clear" class="form-check-input" id="id_thumbnail-clear">
+                        <label class="form-check-label" for="id_thumbnail-clear">Eliminar imatge actual</label>
+                    </div>
+                {% endif %}
+
+                {% for error in form.thumbnail.errors %}
+                    <div class="alert alert-danger mt-1">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <!-- Camp: màxim de visualitzadors -->
+            <div class="mb-3">
+                {{ form.max_viewers.label_tag }}
+                {{ form.max_viewers }}
+                {% for error in form.max_viewers.errors %}
+                    <div class="alert alert-danger mt-1">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <!-- Camp: tags -->
+            <div class="mb-3">
+                {{ form.tags.label_tag }}
+                {{ form.tags }}
+                {% for error in form.tags.errors %}
+                    <div class="alert alert-danger mt-1">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <!-- Camp: URL del stream -->
+            <div class="mb-3">
+                {{ form.stream_url.label_tag }}
+                {{ form.stream_url }}
+                {% for error in form.stream_url.errors %}
+                    <div class="alert alert-danger mt-1">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <!-- Camp: estat -->
+            <div class="mb-3">
+                {{ form.status.label_tag }}
+                {{ form.status }}
+                {% for error in form.status.errors %}
+                    <div class="alert alert-danger mt-1">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <!-- Botó de guardar -->
+            <button type="submit" class="btn btn-success w-100 mt-3">
+                <i class="fa-solid fa-floppy-disk me-1"></i> Guardar
+            </button>
+        </form>
+
+        <!-- Botó per tornar a la llista dels meus esdeveniments -->
+        <div class="text-center mt-3">
+            <a href="{% url 'events:my_events' %}" class="btn btn-outline-primary">
+                <i class="fa-solid fa-arrow-left me-1"></i> Tornar als meus esdeveniments
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,25 +1,53 @@
 {% extends "base.html" %}
+{% load static %}
+
 {% block title %}Inici - StreamEvents{% endblock %}
 
 {% block content %}
-<!-- Contingut principal de la pàgina d'inici, centrat verticalment i horitzontalment -->
-<div class="text-center py-5">
-    <!-- Títol principal amb estil Bootstrap -->
-    <h1 class="display-5 fw-bold mb-3">Benvingut/da a <span class="text-primary">StreamEvents</span></h1>
-    <!-- Descripció curta de la plataforma -->
-    <p class="lead text-muted mb-4">La teva plataforma per gestionar esdeveniments en línia.</p>
+<!-- Hero Section -->
+<section class="py-5 text-center bg-light">
+    <div class="container">
+        <h1 class="display-5 fw-bold mb-3">Benvingut/da a <span class="text-primary">StreamEvents</span></h1>
+        <p class="lead text-muted mb-4">La teva plataforma per gestionar esdeveniments en línia.</p>
 
-    <!-- Botons segons si l'usuari està autenticat o no -->
-    {% if user.is_authenticated %}
-        <!-- Botó per anar al perfil -->
-        <a href="{% url 'users:profile' %}" class="btn btn-primary btn-lg me-2">Anar al perfil</a>
-        <!-- Botó per tancar sessió -->
-        <a href="{% url 'users:logout' %}" class="btn btn-outline-danger btn-lg">Tancar sessió</a>
-    {% else %}
-        <!-- Botó per iniciar sessió -->
-        <a href="{% url 'users:login' %}" class="btn btn-primary btn-lg me-2">Inicia sessió</a>
-        <!-- Botó per registrar-se -->
-        <a href="{% url 'users:register' %}" class="btn btn-outline-primary btn-lg">Registra't</a>
-    {% endif %}
-</div>
+        {% if user.is_authenticated %}
+            <a href="{% url 'users:profile' %}" class="btn btn-primary btn-lg me-2">Anar al perfil</a>
+            <a href="{% url 'users:logout' %}" class="btn btn-outline-danger btn-lg">Tancar sessió</a>
+        {% else %}
+            <a href="{% url 'users:login' %}" class="btn btn-primary btn-lg me-2">Inicia sessió</a>
+            <a href="{% url 'users:register' %}" class="btn btn-outline-primary btn-lg">Registra't</a>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Esdeveniments Destacats -->
+<section class="py-5">
+    <div class="container">
+        <h2 class="mb-4 text-center">Esdeveniments Destacats</h2>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+            {% for event in featured_events %}
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    {% if event.thumbnail %}
+                        <img src="{{ event.thumbnail.url }}" class="card-img-top" alt="{{ event.title }}">
+                    {% else %}
+                        <img src="{% static 'events/default_thumbnail.jpg' %}" class="card-img-top" alt="Default">
+                    {% endif %}
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">{{ event.title }}</h5>
+                        <p class="card-text text-muted mb-3">{{ event.category|title }} - {{ event.scheduled_date|date:"d/m/Y H:i" }}</p>
+                        <a href="{{ event.get_absolute_url }}" class="btn btn-sm btn-primary mt-auto">Veure més</a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p class="text-center text-muted">Encara no hi ha esdeveniments destacats.</p>
+            {% endfor %}
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="{% url 'events:event_list' %}" class="btn btn-lg btn-outline-primary">Veure tots els esdeveniments</a>
+        </div>
+    </div>
+</section>
 {% endblock %}

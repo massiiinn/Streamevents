@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container py-4">
+    <div class="card shadow-sm mx-auto" style="max-width: 850px;">
+
+        <!-- Miniatura de l'esdeveniment o imatge per defecte -->
+        <div class="text-center p-3 border-bottom bg-light">
+            {% if event.thumbnail %}
+                <img src="{{ event.thumbnail.url }}" alt="{{ event.title }}" class="img-fluid rounded" style="max-height:300px;">
+            {% else %}
+                <img src="{% static 'events/default_thumbnail.jpg' %}" alt="{{ event.title }}" class="img-fluid rounded" style="max-height:300px;">
+            {% endif %}
+        </div>
+
+        <!-- Títol de l'esdeveniment -->
+        <div class="p-3 border-bottom text-center">
+            <h2>{{ event.title }}</h2>
+        </div>
+
+        <!-- Informació general: categoria, data, estat i màxim d'espectadors -->
+        <div class="p-3 border-bottom">
+            <div class="row mb-2">
+                <div class="col-md-4">
+                    <strong>Categoria:</strong>
+                    <span class="badge bg-info text-dark">{{ event.category|title }}</span>
+                </div>
+
+                <div class="col-md-4">
+                    <strong>Data:</strong> {{ event.scheduled_date|date:"d/m/Y H:i" }}
+                </div>
+
+                <div class="col-md-4">
+                    <strong>Estat:</strong>
+                    {% if event.status == 'live' %}
+                        <span class="badge bg-danger">En directe</span>
+                    {% elif event.status == 'scheduled' %}
+                        <span class="badge bg-primary">Programat</span>
+                    {% elif event.status == 'finished' %}
+                        <span class="badge bg-success">Finalitzat</span>
+                    {% else %}
+                        <span class="badge bg-secondary">Cancel·lat</span>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <strong>Max Viewers:</strong> {{ event.max_viewers }}
+                </div>
+            </div>
+        </div>
+
+        <!-- Recuadre del creador amb icona i informació bàsica -->
+        <div class="p-3 border-bottom bg-light rounded">
+            <h5 class="mb-2">
+                <i class="fa-solid fa-user me-1"></i> Creador
+            </h5>
+
+            <div class="d-flex align-items-center">
+                <div class="me-3">
+                    <i class="fa-solid fa-circle-user fa-3x text-secondary"></i>
+                </div>
+
+                <div>
+                    <p class="mb-1">
+                        <strong>Usuari:</strong> {{ event.creator.username }}
+                    </p>
+                    <p class="mb-0">
+                        <strong>ID:</strong> {{ event.creator.id }}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Descripció de l'esdeveniment -->
+        <div class="p-3 border-bottom">
+            <h5>Descripció</h5>
+            <p>{{ event.description }}</p>
+        </div>
+
+        <!-- Tags associats -->
+        {% if event.get_tags_list %}
+            <div class="p-3 border-bottom">
+                <h6>Tags:</h6>
+                {% for tag in event.get_tags_list %}
+                    <span class="badge bg-secondary me-1">{{ tag }}</span>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- Miniatura clicable del vídeo (YouTube, Twitch, etc.) -->
+        {% if event.stream_url %}
+            <div class="p-3 border-bottom text-center">
+                <h5 class="mb-3">Veure Stream</h5>
+
+                <!-- Enllaç al vídeo amb imatge miniatura -->
+                <a href="{{ event.stream_url }}" target="_blank">
+                    <img src="{{ event.get_stream_thumbnail }}"
+                         alt="Miniatura del vídeo"
+                         class="img-fluid rounded shadow"
+                         style="max-height:300px;">
+                </a>
+
+                <p class="small text-muted mt-2">Fes clic per obrir el vídeo</p>
+            </div>
+        {% endif %}
+
+        <!-- Botons: Editar, Eliminar i Tornar -->
+        <div class="p-3 text-center">
+            {% if request.user == event.creator %}
+                <a href="{% url 'events:event_update' event.pk %}"
+                   class="btn btn-warning w-100 mb-2">
+                    <i class="fa-solid fa-pen-to-square me-1"></i> Editar
+                </a>
+
+                <a href="{% url 'events:event_delete' event.pk %}"
+                   class="btn btn-danger w-100 mb-2">
+                    <i class="fa-solid fa-trash me-1"></i> Eliminar
+                </a>
+            {% endif %}
+
+            <a href="{% url 'events:event_list' %}"
+               class="btn btn-outline-primary w-100">
+                <i class="fa-solid fa-arrow-left me-1"></i> Tornar a Esdeveniments
+            </a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -4,44 +4,100 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Títol de la pàgina, es pot sobreescriure amb el bloc title -->
   <title>{% block title %}StreamEvents{% endblock %}</title>
 
-  <!-- Bootstrap CSS des de CDN -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Font Awesome per icones -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-  <!-- Fulla d'estils principal del projecte -->
   <link rel="stylesheet" href="{% static 'css/main.css' %}">
 </head>
 
 <body class="bg-light d-flex flex-column min-vh-100">
 
-  <!-- Inclou la barra de navegació -->
-  {% include "includes/navbar.html" %}
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold text-primary" href="{% url 'home' %}">
+        <i class="fa-solid fa-tv me-1"></i> StreamEvents
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-  <!-- Contenidor principal amb marge vertical i creixement flexible -->
+      <div class="collapse navbar-collapse" id="navbarNav">
+
+        <!-- Esquerra -->
+        <ul class="navbar-nav me-auto">
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'events:event_list' %}">
+              <i class="fa-solid fa-calendar-days me-1"></i> Esdeveniments
+            </a>
+          </li>
+
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'events:event_create' %}">
+                <i class="fa-solid fa-plus me-1"></i> Crear Esdeveniment
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'events:my_events' %}">
+                <i class="fa-solid fa-star me-1"></i> Els meus esdeveniments
+              </a>
+            </li>
+          {% endif %}
+
+        </ul>
+
+        <!-- Dreta -->
+        <ul class="navbar-nav ms-auto">
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'users:profile' %}">
+                <i class="fa-solid fa-user me-1"></i> Perfil
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-danger" href="{% url 'users:logout' %}">
+                <i class="fa-solid fa-right-from-bracket me-1"></i> Tancar sessió
+              </a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'users:login' %}">
+                <i class="fa-solid fa-right-to-bracket me-1"></i> Inicia sessió
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'users:register' %}">
+                <i class="fa-solid fa-user-plus me-1"></i> Registra't
+              </a>
+            </li>
+          {% endif %}
+        </ul>
+
+      </div>
+    </div>
+  </nav>
+
   <main class="container my-4 flex-grow-1">
-    <!-- Inclou els missatges flash/toasts -->
     {% include "includes/messages.html" %}
-    <!-- Bloc de contingut específic de cada pàgina -->
     {% block content %}{% endblock %}
   </main>
 
-  <!-- Inclou el footer -->
-  {% include "includes/footer.html" %}
+  <footer class="bg-white text-center text-muted py-3 mt-auto shadow-sm">
+    &copy; {{ now.year }} StreamEvents. Tots els drets reservats.
+  </footer>
 
-  <!-- Bootstrap JS Bundle des de CDN (inclou Popper) -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Script per inicialitzar tots els toasts automàticament -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const toastElList = [].slice.call(document.querySelectorAll('.toast'));
       toastElList.map(toastEl => new bootstrap.Toast(toastEl).show());
     });
   </script>
+
 </body>
 </html>

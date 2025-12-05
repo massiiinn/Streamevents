@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card shadow-sm p-4 mx-auto" style="max-width: 600px;">
+    
+    {# Títol amb icona d'advertència #}
+    <h2 class="mb-3 text-center">
+        <i class="fa-solid fa-triangle-exclamation me-2 text-danger"></i> Confirmar eliminació
+    </h2>
+
+    {# Missatge de confirmació amb el títol de l'esdeveniment #}
+    <p class="text-center mb-4">Segur que vols eliminar l'esdeveniment <strong>"{{ event.title }}"</strong>?</p>
+
+    {# Formulari per confirmar l'eliminació amb botons #}
+    <form method="post" class="d-flex justify-content-center gap-2">
+        {% csrf_token %}
+        {# Botó d'eliminar #}
+        <button type="submit" class="btn btn-danger">
+            <i class="fa-solid fa-trash me-1"></i> Eliminar
+        </button>
+        {# Botó per cancel·lar i tornar a la pàgina de detalls #}
+        <a href="{% url 'events:event_detail' event.pk %}" class="btn btn-secondary">
+            <i class="fa-solid fa-arrow-left me-1"></i> Cancel·lar
+        </a>
+    </form>
+</div>
+{% endblock %}

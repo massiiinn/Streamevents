@@ -1,0 +1,302 @@
+[
+    {
+      "model": "events.event",
+      "pk": 1,
+      "fields": {
+        "title": "Torneig Fortnite 2025",
+        "description": "Competició oficial amb jugadors de nivell alt.",
+        "creator": 1,
+        "category": "gaming",
+        "scheduled_date": "2025-06-10T18:00:00",
+        "status": "scheduled",
+        "thumbnail": "",
+        "max_viewers": 300,
+        "is_featured": true,
+        "created_at": "2025-02-01T10:00:00",
+        "updated_at": "2025-02-01T10:00:00",
+        "tags": "fortnite, tornejos, battle royale",
+        "stream_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+      }
+    },
+  
+    {
+      "model": "events.event",
+      "pk": 2,
+      "fields": {
+        "title": "Concert Acústic en Directe",
+        "description": "Sessió íntima amb música suau.",
+        "creator": 2,
+        "category": "music",
+        "scheduled_date": "2025-05-22T21:00:00",
+        "status": "live",
+        "thumbnail": "",
+        "max_viewers": 150,
+        "is_featured": true,
+        "created_at": "2025-02-02T09:30:00",
+        "updated_at": "2025-02-02T09:30:00",
+        "tags": "música, acústic, live",
+        "stream_url": "https://youtu.be/9bZkp7q19f0"
+      }
+    },
+  
+    {
+      "model": "events.event",
+      "pk": 3,
+      "fields": {
+        "title": "Xerrada sobre Intel·ligència Artificial",
+        "description": "Discussió de models transformers i aplicacions reals.",
+        "creator": 3,
+        "category": "education",
+        "scheduled_date": "2025-03-10T17:00:00",
+        "status": "live",
+        "thumbnail": "",
+        "max_viewers": 500,
+        "is_featured": false,
+        "created_at": "2025-02-03T12:00:00",
+        "updated_at": "2025-02-03T12:00:00",
+        "tags": "IA, tecnologia, aprenentatge",
+        "stream_url": "https://www.youtube.com/watch?v=K4TOrB7at0Y"
+      }
+    },
+  
+    {
+      "model": "events.event",
+      "pk": 4,
+      "fields": {
+        "title": "Seminari d'HTML i CSS",
+        "description": "Aprèn a crear pàgines web modernes.",
+        "creator": 2,
+        "category": "education",
+        "scheduled_date": "2025-05-01T15:00:00",
+        "status": "scheduled",
+        "thumbnail": "",
+        "max_viewers": 200,
+        "is_featured": false,
+        "created_at": "2025-02-04T18:00:00",
+        "updated_at": "2025-02-04T18:00:00",
+        "tags": "web, html, css",
+        "stream_url": ""
+      }
+    },
+  
+    {
+      "model": "events.event",
+      "pk": 5,
+      "fields": {
+        "title": "Partit de Futbol: Final Amateur",
+        "description": "Streaming del partit final amb narració.",
+        "creator": 1,
+        "category": "sports",
+        "scheduled_date": "2025-02-28T20:00:00",
+        "status": "finished",
+        "thumbnail": "",
+        "max_viewers": 800,
+        "is_featured": false,
+        "created_at": "2025-02-05T08:00:00",
+        "updated_at": "2025-02-05T08:00:00",
+        "tags": "esports, futbol",
+        "stream_url": "https://www.youtube.com/watch?v=Zi_XLOBDo_Y"
+      }
+    },
+  
+    {
+      "model": "events.event",
+      "pk": 6,
+      "fields": {
+        "title": "Podcast de Tecnologia: Edició Especial",
+        "description": "Debat sobre innovació en 2025.",
+        "creator": 3,
+        "category": "technology",
+        "scheduled_date": "2025-02-27T19:00:00",
+        "status": "live",
+        "thumbnail": "",
+        "max_viewers": 250,
+        "is_featured": false,
+        "created_at": "2025-02-06T11:00:00",
+        "updated_at": "2025-02-06T11:00:00",
+        "tags": "podcast, tecnologia, innovació",
+        "stream_url": "https://www.twitch.tv/examplechannel"
+      }
+    },
+  
+    {
+      "model": "events.event",
+      "pk": 7,
+      "fields": {
+        "title": "Masterclass de Pintura Digital",
+        "description": "Aprèn tècniques avançades de dibuix digital.",
+        "creator": 1,
+        "category": "art",
+        "scheduled_date": "2025-06-21T17:00:00",
+        "status": "scheduled",
+        "thumbnail": "",
+        "max_viewers": 120,
+        "is_featured": true,
+        "created_at": "2025-02-07T14:00:00",
+        "updated_at": "2025-02-07T14:00:00",
+        "tags": "art, pintura, digital",
+        "stream_url": ""
+      }
+    },
+  
+    {
+      "model": "events.event",
+      "pk": 8,
+      "fields": {
+        "title": "Debat sobre Cinema Modern",
+        "description": "Discussió crítica sobre pel·lícules de 2024.",
+        "creator": 2,
+        "category": "entertainment",
+        "scheduled_date": "2025-03-30T19:30:00",
+        "status": "scheduled",
+        "thumbnail": "",
+        "max_viewers": 300,
+        "is_featured": false,
+        "created_at": "2025-02-08T13:00:00",
+        "updated_at": "2025-02-08T13:00:00",
+        "tags": "cinema, debat",
+        "stream_url": ""
+      }
+    },
+  
+    {
+      "model": "events.event",
+      "pk": 9,
+      "fields": {
+        "title": "Gaming Retro Night",
+        "description": "Jugarem clàssics dels anys 90.",
+        "creator": 3,
+        "category": "gaming",
+        "scheduled_date": "2025-05-14T22:00:00",
+        "status": "scheduled",
+        "thumbnail": "",
+        "max_viewers": 500,
+        "is_featured": false,
+        "created_at": "2025-02-09T17:00:00",
+        "updated_at": "2025-02-09T17:00:00",
+        "tags": "retro, gaming, 90s",
+        "stream_url": "https://www.youtube.com/watch?v=oHg5SJYRHA0"
+      }
+    },
+  
+    {
+      "model": "events.event",
+      "pk": 10,
+      "fields": {
+        "title": "Documental: El Futur de l'Energia",
+        "description": "Exploració de tecnologies renovables.",
+        "creator": 1,
+        "category": "education",
+        "scheduled_date": "2025-01-15T17:00:00",
+        "status": "finished",
+        "thumbnail": "",
+        "max_viewers": 1000,
+        "is_featured": false,
+        "created_at": "2025-02-10T10:30:00",
+        "updated_at": "2025-02-10T10:30:00",
+        "tags": "energia, futur",
+        "stream_url": ""
+      }
+    },
+  
+    {
+      "model": "events.event",
+      "pk": 11,
+      "fields": {
+        "title": "Classe de Cuina Mediterrània",
+        "description": "Aprèn receptes saludables i tradicionals.",
+        "creator": 2,
+        "category": "other",
+        "scheduled_date": "2025-04-05T12:00:00",
+        "status": "scheduled",
+        "thumbnail": "",
+        "max_viewers": 90,
+        "is_featured": false,
+        "created_at": "2025-02-11T09:30:00",
+        "updated_at": "2025-02-11T09:30:00",
+        "tags": "cuina, mediterrània",
+        "stream_url": ""
+      }
+    },
+  
+    {
+      "model": "events.event",
+      "pk": 12,
+      "fields": {
+        "title": "Karaoke Night",
+        "description": "Nit divertida cantant cançons populars.",
+        "creator": 3,
+        "category": "entertainment",
+        "scheduled_date": "2025-05-03T22:00:00",
+        "status": "scheduled",
+        "thumbnail": "",
+        "max_viewers": 200,
+        "is_featured": true,
+        "created_at": "2025-02-12T20:00:00",
+        "updated_at": "2025-02-12T20:00:00",
+        "tags": "karaoke, música",
+        "stream_url": ""
+      }
+    },
+  
+    {
+      "model": "events.event",
+      "pk": 13,
+      "fields": {
+        "title": "Fitness en Directe",
+        "description": "Sessió intensa per millorar la forma física.",
+        "creator": 1,
+        "category": "sports",
+        "scheduled_date": "2025-05-07T09:00:00",
+        "status": "scheduled",
+        "thumbnail": "",
+        "max_viewers": 350,
+        "is_featured": false,
+        "created_at": "2025-02-13T11:00:00",
+        "updated_at": "2025-02-13T11:00:00",
+        "tags": "fitness, esport",
+        "stream_url": "https://youtu.be/5NV6Rdv1a3I"
+      }
+    },
+  
+    {
+      "model": "events.event",
+      "pk": 14,
+      "fields": {
+        "title": "Taller d'Edició de Vídeo",
+        "description": "Aprèn Premiere i DaVinci Resolve.",
+        "creator": 3,
+        "category": "technology",
+        "scheduled_date": "2025-04-12T18:00:00",
+        "status": "scheduled",
+        "thumbnail": "",
+        "max_viewers": 180,
+        "is_featured": false,
+        "created_at": "2025-02-14T09:45:00",
+        "updated_at": "2025-02-14T09:45:00",
+        "tags": "vídeo, edició",
+        "stream_url": ""
+      }
+    },
+  
+    {
+      "model": "events.event",
+      "pk": 15,
+      "fields": {
+        "title": "Marató de Sèries",
+        "description": "Veurem capítols de sèries populars i comentarem.",
+        "creator": 2,
+        "category": "entertainment",
+        "scheduled_date": "2025-07-01T20:00:00",
+        "status": "scheduled",
+        "thumbnail": "",
+        "max_viewers": 600,
+        "is_featured": true,
+        "created_at": "2025-02-15T12:00:00",
+        "updated_at": "2025-02-15T12:00:00",
+        "tags": "series, marató",
+        "stream_url": ""
+      }
+    }
+  ]
+  

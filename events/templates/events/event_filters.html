@@ -1,0 +1,45 @@
+<form method="get" action="{% url 'events:event_list' %}" class="row g-2 mb-4 align-items-center">
+
+    <!-- Cerca per títol de l'esdeveniment -->
+    <div class="col-md-4">
+        <div class="input-group">
+            <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
+            <input type="text" name="q" value="{{ search_form.q.value }}" placeholder="Buscar esdeveniments" class="form-control">
+        </div>
+    </div>
+
+    <!-- Filtre per categoria -->
+    <div class="col-md-3">
+        <select name="category" class="form-select">
+            <option value="">Totes les categories</option>
+            <option value="gaming" {% if search_form.category.value == "gaming" %}selected{% endif %}>🎮 Gaming</option>
+            <option value="music" {% if search_form.category.value == "music" %}selected{% endif %}>🎵 Música</option>
+            <option value="talk" {% if search_form.category.value == "talk" %}selected{% endif %}>💬 Xerrades</option>
+            <option value="education" {% if search_form.category.value == "education" %}selected{% endif %}>📚 Educació</option>
+            <option value="sports" {% if search_form.category.value == "sports" %}selected{% endif %}>🏅 Esports</option>
+            <option value="entertainment" {% if search_form.category.value == "entertainment" %}selected{% endif %}>🎭 Entreteniment</option>
+            <option value="technology" {% if search_form.category.value == "technology" %}selected{% endif %}>💻 Tecnologia</option>
+            <option value="art" {% if search_form.category.value == "art" %}selected{% endif %}>🎨 Art i Creativitat</option>
+            <option value="other" {% if search_form.category.value == "other" %}selected{% endif %}>🔹 Altres</option>
+        </select>
+    </div>
+
+    <!-- Filtre per estat de l'esdeveniment -->
+    <div class="col-md-3">
+        <select name="status" class="form-select">
+            <option value="">Tots els estats</option>
+            <option value="scheduled" {% if search_form.status.value == "scheduled" %}selected{% endif %}>🗓️ Programat</option>
+            <option value="live" {% if search_form.status.value == "live" %}selected{% endif %}>🔴 En directe</option>
+            <option value="finished" {% if search_form.status.value == "finished" %}selected{% endif %}>✅ Finalitzat</option>
+            <option value="cancelled" {% if search_form.status.value == "cancelled" %}selected{% endif %}>❌ Cancel·lat</option>
+        </select>
+    </div>
+
+    <!-- Botó de cerca -->
+    <div class="col-md-2 d-grid">
+        <button type="submit" class="btn btn-primary w-100">
+            <i class="fa-solid fa-magnifying-glass me-1"></i> Buscar
+        </button>
+    </div>
+
+</form>
