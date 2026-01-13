@@ -1,0 +1,71 @@
+{% load static %}
+
+<!-- =================== CARREGAR CSS DEL XAT =================== -->
+<link rel="stylesheet" href="{% static 'chat/css/chat.css' %}">
+
+<!-- =================== CONTENIDOR PRINCIPAL =================== -->
+<!-- data-event-id: passa l'ID de l'esdeveniment al JavaScript -->
+<!-- data-username: passa el nom de l'usuari actual al JavaScript -->
+<div class="chat-container" 
+     data-event-id="{{ event.id }}"
+     data-username="{{ user.username }}"> 
+
+    <!-- =================== CAPÇALERA =================== -->
+    <!-- Emoji de xat i comptador de missatges -->
+    <div class="chat-header">
+        <span>💬</span>
+        <!-- Badge que mostra el nombre de missatges (actualitzat pel JS) -->
+        <span id="message-count" class="badge bg-primary">0</span>
+    </div>
+
+    <!-- =================== ÀREA DE MISSATGES =================== -->
+    <!-- Aquí es mostraran dinàmicament tots els missatges del xat -->
+    <div id="chat-messages" class="chat-messages">
+        <!-- Spinner inicial mentre carreguen els missatges -->
+        <div class="text-center text-muted py-4">
+            <div class="spinner-border spinner-border-sm me-2"></div>
+            Carregant missatges...
+        </div>
+    </div>
+
+    <!-- =================== CONTENIDOR D'ERRORS =================== -->
+    <!-- Aquí es mostren els errors de validació del formulari -->
+    <div id="chat-errors" class="px-3"></div>
+
+    <!-- =================== FORMULARI D'ENVIAMENT =================== -->
+    <!-- Només es mostra si: l'usuari està autenticat i l'esdeveniment està en directe -->
+    {% if user.is_authenticated and event.status == 'live' %}
+    <form id="chat-form" class="chat-form d-flex gap-2">
+        {% csrf_token %} <!-- Token de seguretat per prevenir atacs CSRF -->
+        <!-- Textarea on l'usuari escriu el missatge -->
+        <textarea name="message" class="form-control" rows="2" 
+                  placeholder="Escriu un missatge..." maxlength="500" required></textarea>
+        <!-- Botó per enviar el missatge -->
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+    
+    <!-- =================== MISSATGE: NO AUTENTICAT =================== -->
+    <!-- Es mostra si l'usuari no ha iniciat sessió -->
+    {% elif not user.is_authenticated %}
+    <div class="p-3 text-center border-top">
+        <p class="text-muted mb-0">
+            <i class="fas fa-sign-in-alt me-1"></i>
+            Inicia sessió per participar al xat
+        </p>
+    </div>
+    
+    <!-- =================== MISSATGE: ESDEVENIMENT NO EN DIRECTE =================== -->
+    <!-- Es mostra si l'esdeveniment no està amb status='live' -->
+    {% else %}
+    <div class="p-3 text-center border-top">
+        <p class="text-muted mb-0">
+            <i class="fas fa-video-slash me-1"></i>
+            El xat només està disponible durant l'esdeveniment en directe
+        </p>
+    </div>
+    {% endif %}
+</div>
+
+<!-- =================== CARREGAR JAVASCRIPT DEL XAT =================== -->
+<!-- S'executa després del HTML per assegurar que tots els elements existeixen -->
+<script src="{% static 'chat/js/chat.js' %}"></script>

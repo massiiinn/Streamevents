@@ -5,6 +5,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.utils import timezone
 from .models import Event
 from .forms import EventCreationForm, EventUpdateForm, EventSearchForm
+from chat.forms import ChatMessageForm
 
 
 # Llista general d'esdeveniments amb paginació i filtres
@@ -43,6 +44,12 @@ class EventDetailView(DetailView):
     model = Event
     template_name = "events/event_detail.html"
     context_object_name = "event"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Añadimos el formulario del chat
+        context['chat_form'] = ChatMessageForm()
+        return context
 
 
 # Crear un nou esdeveniment (usuari autenticat)

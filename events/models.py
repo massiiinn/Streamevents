@@ -152,3 +152,4 @@ class Event(models.Model):
         ordering = ['-created_at']
         verbose_name = 'Esdeveniment'
         verbose_name_plural = 'Esdeveniments'
+        

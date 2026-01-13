@@ -1,0 +1,178 @@
+/* =================== CONTENIDOR PRINCIPAL DEL XAT =================== */
+/* Defineix l'alçada total i la disposició en columna del xat */
+.chat-container {
+    height: 600px;
+    display: flex;
+    flex-direction: column; /* Els elements es col·loquen verticalment */
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden; /* Evita que el contingut surti del contenidor */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* Ombra suau */
+}
+
+/* =================== CAPÇALERA DEL XAT =================== */
+/* Zona superior amb el títol i el comptador de missatges */
+.chat-header {
+    background: #f8f9fa;
+    padding: 15px;
+    border-bottom: 1px solid #dee2e6;
+    display: flex;
+    justify-content: space-between; /* Títol a l'esquerra, badge a la dreta */
+    align-items: center;
+}
+
+/* =================== ÀREA DE MISSATGES =================== */
+/* Contenidor on es mostren tots els missatges */
+.chat-messages {
+    flex: 1; /* Ocupa tot l'espai disponible */
+    overflow-y: auto; /* Scroll vertical quan hi ha molts missatges */
+    max-height: 450px;
+    padding: 15px;
+    background: #fafafa;
+    display: flex;
+    flex-direction: column; /* Missatges apilats verticalment */
+    gap: 10px; /* Espai entre missatges */
+}
+
+/* =================== MISSATGE INDIVIDUAL =================== */
+/* Cada bombolla de missatge del xat */
+.chat-message {
+    display: inline-block;
+    max-width: 70%; /* No ocupa més del 70% de l'ample */
+    padding: 12px 15px;
+    border-radius: 12px; /* Bombolles arrodonides */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    word-wrap: break-word; /* Trenca paraules llargues */
+    line-height: 1.5;
+    transition: all 0.3s ease; /* Animació suau per hover */
+    position: relative;
+}
+
+/* =================== EFECTE HOVER =================== */
+/* Quan passes el ratolí per sobre d'un missatge */
+.chat-message:hover {
+    transform: translateY(-2px); /* Puja lleugerament */
+    box-shadow: 0 3px 6px rgba(0,0,0,0.15); /* Ombra més pronunciada */
+}
+
+/* =================== COLORS PER USUARI =================== */
+/* Cada usuari té un color diferent per distingir-los visualment */
+
+/* Usuari 1 - Blau */
+.chat-message.user-1 {
+    background: #d1f0ff;
+    border-left: 4px solid #1ca7ec; /* Barra lateral d'identificació */
+    align-self: flex-start; /* Alineat a l'esquerra */
+}
+
+/* Usuari 2 - Vermell */
+.chat-message.user-2 {
+    background: #ffe3e3;
+    border-left: 4px solid #f95f5f;
+    align-self: flex-start;
+}
+
+/* Usuari 3 - Verd */
+.chat-message.user-3 {
+    background: #e7ffd1;
+    border-left: 4px solid #7fd13b;
+    align-self: flex-start;
+}
+
+/* =================== MISSATGE DESTACAT =================== */
+/* Quan el creador de l'esdeveniment destaca un missatge */
+.chat-message.highlighted {
+    background: #fff3cd; /* Fons groc clar */
+    border-left-color: #ffc107; /* Barra groga */
+}
+
+/* =================== CAPÇALERA DEL MISSATGE =================== */
+/* Zona amb el nom d'usuari i la data/hora */
+.message-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 5px;
+}
+
+/* Nom d'usuari en negreta */
+.message-header strong {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+/* Timestamp (fa 2 minuts, fa 1 hora...) */
+.message-header small {
+    color: #7f8c8d;
+    font-size: 0.75rem;
+}
+
+/* =================== CONTINGUT DEL MISSATGE =================== */
+/* El text del missatge pròpiament dit */
+.message-content {
+    color: #34495e;
+}
+
+/* =================== FORMULARI D'ENVIAMENT =================== */
+/* Zona inferior on l'usuari escriu i envia missatges */
+.chat-form {
+    padding: 15px;
+    border-top: 1px solid #dee2e6;
+    background: #fff;
+}
+
+/* Evita que el textarea pugui canviar de mida */
+.chat-form .form-control {
+    resize: none;
+}
+
+/* =================== SCROLLBAR PERSONALITZADA =================== */
+/* Estils per la barra de scroll (només funciona a Chrome/Safari) */
+
+/* Amplada de la barra de scroll */
+.chat-messages::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Fons de la barra de scroll */
+.chat-messages::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+/* L'indicador (thumb) de la barra de scroll */
+.chat-messages::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+/* Thumb quan passes el ratolí per sobre */
+.chat-messages::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* =================== RESPONSIVE =================== */
+
+/* Tablets i pantalles mitjanes (992px o menys) */
+@media (max-width: 992px) {
+    .chat-container {
+        height: 400px; /* Alçada reduïda */
+        margin-top: 20px; /* Espai superior */
+    }
+}
+
+/* Mòbils i pantalles petites (576px o menys) */
+@media (max-width: 576px) {
+    .chat-container {
+        height: 350px; /* Alçada encara més petita */
+    }
+    
+    /* Padding reduït per aprofitar espai */
+    .chat-messages {
+        padding: 10px;
+    }
+    
+    .chat-form {
+        padding: 10px;
+    }
+}

@@ -8,7 +8,8 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", home_view, name="home"),
     path("users/", include("users.urls")),
-    path("events/", include("events.urls")),  # ← Afegit per l'app events
+    path("events/", include("events.urls")),  
+    path('chat/', include('chat.urls')),
 ]
 
 if settings.DEBUG:

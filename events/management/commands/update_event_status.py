@@ -11,7 +11,7 @@ class Command(BaseCommand):
 
         for event in events:
 
-            # Si està programat i ja ha començat → en directe
+            # Si està programat i ja ha començat → en directe  
             if event.status == 'scheduled' and event.scheduled_date <= now:
                 event.status = 'live'
                 event.save()
