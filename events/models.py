@@ -28,6 +28,29 @@ STATUS_CHOICES = [
     ('cancelled', 'Cancel·lat'),
 ]
 
+
+# Campo personalizado para manejar embeddings como lista en MongoDB
+class ListField(models.JSONField):
+    """Campo personalizado para listas en MongoDB con Djongo"""
+    
+    def from_db_value(self, value, expression, connection):
+        # Si ya es una lista, devolverla directamente
+        if isinstance(value, list):
+            return value
+        # Si es None, devolver None
+        if value is None:
+            return value
+        # Si es string JSON, deserializar
+        if isinstance(value, str):
+            import json
+            return json.loads(value)
+        return value
+    
+    def get_prep_value(self, value):
+        # Guardar tal cual (Djongo/MongoDB aceptan listas directamente)
+        return value
+
+
 class Event(models.Model):
     # Camps bàsics
     title = models.CharField(max_length=200)
@@ -43,6 +66,10 @@ class Event(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     tags = models.CharField(max_length=500, blank=True, null=True)
     stream_url = models.URLField(max_length=500, blank=True, null=True)
+    
+    embedding = ListField(blank=True, null=True)
+    embedding_model = models.CharField(max_length=200, blank=True, null=True)
+    embedding_updated_at = models.DateTimeField(blank=True, null=True)
 
     def __str__(self):
         return self.title

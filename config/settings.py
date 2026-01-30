@@ -17,6 +17,7 @@ INSTALLED_APPS = [
     'users',  
     'events',
     'chat',
+    'semantic_search',
 ]
 
 MIDDLEWARE = [

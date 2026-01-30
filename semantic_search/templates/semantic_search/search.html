@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+
+{% block title %}Cerca Semàntica - StreamEvents{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <!-- Capçalera de la pàgina -->
+            <div class="text-center mb-4">
+                <h2 class="fw-bold">
+                    <i class="fa-solid fa-magnifying-glass text-primary"></i>
+                    Cerca Semàntica
+                </h2>
+                <p class="text-muted">Troba esdeveniments utilitzant llenguatge natural</p>
+            </div>
+            
+            <!-- Formulari de cerca -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-body p-4">
+                    <form method="get">
+                        <!-- Camp de text per la cerca amb icona i botó -->
+                        <div class="input-group input-group-lg mb-3">
+                            <span class="input-group-text bg-white">
+                                <i class="fa-solid fa-search text-muted"></i>
+                            </span>
+                            <input 
+                                type="text" 
+                                name="q" 
+                                class="form-control border-start-0" 
+                                value="{{ query }}" 
+                                placeholder="Ex: concert de jazz, torneig de futbol, tecnologia..."
+                                autofocus
+                            >
+                            <button class="btn btn-primary px-4" type="submit">
+                                Cercar
+                            </button>
+                        </div>
+                        
+                        <!-- Checkbox per filtrar només esdeveniments futurs -->
+                        <div class="form-check">
+                            <input 
+                                class="form-check-input" 
+                                type="checkbox" 
+                                name="future" 
+                                value="1" 
+                                id="onlyFuture"
+                                {% if request.GET.future == "1" %}checked{% endif %}
+                            >
+                            <label class="form-check-label text-muted" for="onlyFuture">
+                                <i class="fa-regular fa-calendar"></i> Només esdeveniments futurs
+                            </label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Informació de la cerca: mostra la query i estadístiques -->
+            {% if query %}
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="mb-0">
+                        Resultats per "<strong>{{ query }}</strong>"
+                    </h5>
+                    <small class="text-muted">
+                        {% if search_time %}
+                            <i class="fa-solid fa-clock"></i> {{ search_time }} ms
+                        {% endif %}
+                        | {{ total_results }} resultat{{ total_results|pluralize }}
+                    </small>
+                </div>
+            {% endif %}
+
+            <!-- Bloc de resultats -->
+            {% if query %}
+                {% if results %}
+                    <!-- Llista d'esdeveniments trobats -->
+                    <div class="list-group shadow-sm">
+                        {% for event, score in results %}
+                            <a href="{{ event.get_absolute_url }}" class="list-group-item list-group-item-action border-0 border-bottom">
+                                <div class="d-flex w-100 justify-content-between align-items-start">
+                                    <div class="flex-grow-1">
+                                        <!-- Títol i badge amb el score de similitud -->
+                                        <div class="d-flex align-items-center mb-2">
+                                            <h5 class="mb-0 me-2">{{ event.title }}</h5>
+                                            <span class="badge bg-primary rounded-pill" title="Similitud">
+                                                {{ score|floatformat:2 }}
+                                            </span>
+                                        </div>
+                                        
+                                        <!-- Data i ubicació de l'esdeveniment -->
+                                        <p class="mb-2 text-muted small">
+                                            <i class="fa-solid fa-calendar-day"></i> {{ event.scheduled_date|date:"d/m/Y - H:i" }}
+                                            {% if event.location %}
+                                                <span class="ms-2">
+                                                    <i class="fa-solid fa-location-dot"></i> {{ event.location }}
+                                                </span>
+                                            {% endif %}
+                                        </p>
+                                        
+                                        <!-- Categoria i estat de l'esdeveniment -->
+                                        <div>
+                                            <span class="badge bg-secondary">
+                                                <i class="fa-solid fa-tag"></i> {{ event.category }}
+                                            </span>
+                                            {% if event.status %}
+                                                <span class="badge bg-{% if event.status == 'live' %}danger{% elif event.status == 'upcoming' %}warning text-dark{% else %}success{% endif %}">
+                                                    {{ event.get_status_display }}
+                                                </span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <!-- Missatge quan no hi ha resultats -->
+                    <div class="alert alert-warning d-flex align-items-center" role="alert">
+                        <i class="fa-solid fa-triangle-exclamation fa-2x me-3"></i>
+                        <div>
+                            <strong>Cap resultat trobat</strong><br>
+                            <small>Prova amb altres paraules clau o desmarca el filtre de futurs</small>
+                        </div>
+                    </div>
+                {% endif %}
+            {% else %}
+                <!-- Exemples de cerca quan encara no s'ha cercat res -->
+                <div class="card shadow-sm border-0">
+                    <div class="card-body">
+                        <h6 class="card-title">
+                            <i class="fa-solid fa-lightbulb text-warning"></i>
+                            Exemples de cerca:
+                        </h6>
+                        <!-- Botons amb exemples que omplen el camp de cerca -->
+                        <div class="row g-2">
+                            <div class="col-md-6">
+                                <button class="btn btn-outline-secondary btn-sm w-100 text-start" onclick="document.querySelector('input[name=q]').value='concert de jazz'; this.form.submit();">
+                                    <i class="fa-solid fa-music"></i> concert de jazz
+                                </button>
+                            </div>
+                            <div class="col-md-6">
+                                <button class="btn btn-outline-secondary btn-sm w-100 text-start" onclick="document.querySelector('input[name=q]').value='futbol'; this.form.submit();">
+                                    <i class="fa-solid fa-futbol"></i> futbol
+                                </button>
+                            </div>
+                            <div class="col-md-6">
+                                <button class="btn btn-outline-secondary btn-sm w-100 text-start" onclick="document.querySelector('input[name=q]').value='tecnologia'; this.form.submit();">
+                                    <i class="fa-solid fa-laptop-code"></i> tecnologia
+                                </button>
+                            </div>
+                            <div class="col-md-6">
+                                <button class="btn btn-outline-secondary btn-sm w-100 text-start" onclick="document.querySelector('input[name=q]').value='videojocs'; this.form.submit();">
+                                    <i class="fa-solid fa-gamepad"></i> videojocs
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Missatge informatiu sobre com funciona la cerca -->
+                <div class="alert alert-info mt-3 d-flex align-items-start" role="alert">
+                    <i class="fa-solid fa-circle-info fa-lg me-2 mt-1"></i>
+                    <small>
+                        La cerca semàntica comprèn el <strong>significat</strong> de la teva consulta, 
+                        no només paraules exactes. Escriu de forma natural!
+                    </small>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- Estilos personalitzats per millorar l'aparença del formulari -->
+<style>
+    .input-group-text {
+        border-right: 0;
+    }
+    .form-control.border-start-0 {
+        border-left: 0;
+    }
+    .form-control:focus {
+        box-shadow: none;
+        border-color: #ced4da;
+    }
+    .list-group-item:hover {
+        background-color: #f8f9fa;
+    }
+</style>
+{% endblock %}
